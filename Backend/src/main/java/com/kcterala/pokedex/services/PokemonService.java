@@ -4,12 +4,15 @@ import com.kcterala.pokedex.client.PokemonApiClient;
 import com.kcterala.pokedex.entity.Pokemon;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@CacheConfig(cacheNames = {"example"})
 public class PokemonService {
 
     private PokemonApiClient pokemonApiClient;
@@ -18,6 +21,7 @@ public class PokemonService {
         this.pokemonApiClient = pokemonApiClient;
     }
 
+    @Cacheable
     public Pokemon getPokemonByName(String name) {
         JSONObject object = pokemonApiClient.getPokemonByName(name);
 
@@ -41,7 +45,7 @@ public class PokemonService {
 
         Pokemon pokemon = Pokemon.builder()
                 .id(object.getInt("id"))
-                .name(object.getString("name"))
+                .name(object.getString("name").toUpperCase())
                 .height(object.getInt("height"))
                 .weight(object.getInt("weight"))
                 .abilities(abilityList)
@@ -52,7 +56,7 @@ public class PokemonService {
 
     }
 
-
+    @Cacheable
     public List<Pokemon> getAllPokemons() {
         JSONObject object = pokemonApiClient.getAllPokemons();
         JSONArray pokemonList = (JSONArray) object.get("results");
@@ -66,6 +70,7 @@ public class PokemonService {
         return pokemons;
     }
 
+    @Cacheable
     public List<Pokemon> getPokemonsByType(String type) {
         JSONObject object = pokemonApiClient.getPokemonsByType(type);
         List<Pokemon> pokemons = new ArrayList<>();
@@ -79,6 +84,7 @@ public class PokemonService {
         return pokemons;
     }
 
+    @Cacheable
     public List<Pokemon> getPokemonsByAbility(String ability) {
         JSONObject object = pokemonApiClient.getPokemonByAbility(ability);
         List<Pokemon> pokemons = new ArrayList<>();

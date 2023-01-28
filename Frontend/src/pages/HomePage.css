@@ -1,0 +1,11 @@
+#up {
+  position: relative;
+  margin: 0;
+  height: 100px;
+  background-color: brown;
+}
+
+#down {
+  margin: 0;
+  height: 550px;
+}

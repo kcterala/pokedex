@@ -10,6 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/pokemons")
+@CrossOrigin
 public class PokemonController {
     @Autowired
     private PokemonService pokemonService;
