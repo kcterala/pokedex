@@ -94,8 +94,10 @@ const PokemonBoard = (props) => {
 
       {pokemonData.length > 19 && (
         <div className="d-flex justify-content-center gap-5">
-          <Button onClick={() => prev()}>Prev</Button>
-          <Button onClick={() => next()}>Next</Button>
+          {props.offset > 0 && <Button onClick={() => prev()}>Prev</Button>}
+          {props.offset < pokemonData.length && (
+            <Button onClick={() => next()}>Next</Button>
+          )}
         </div>
       )}
     </>
