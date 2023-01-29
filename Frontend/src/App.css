@@ -5,6 +5,9 @@
   background-color: #f2f2f2;
 }
 
+h1 {
+  font-size: 65px !important;
+}
 .logo {
   height: 6em;
   padding: 1.5em;

@@ -36,8 +36,8 @@ const PokemonBoard = (props) => {
             <Card
               key={pokemon.id}
               style={{
-                height: "18rem",
-                width: "14rem",
+                height: "28rem",
+                width: "15rem",
                 padding: "0",
                 marginBottom: "2rem",
                 margintLeft: "2rem",
@@ -62,8 +62,20 @@ const PokemonBoard = (props) => {
                 </Card.Title>
 
                 <Card.Text>
-                  <div className="d-flex flex-column justify-content-around gap">
-                    <div className="pb-2">Type</div>
+                  <div className="pb-2">
+                    <i>Height: </i>
+                    {pokemon.height}
+                  </div>
+                  <div className="pb-2">
+                    <i>Weight: </i>
+                    {pokemon.weight}
+                  </div>
+                  <div className="pb-2">
+                    <b>
+                      <i>Type</i>
+                    </b>
+                  </div>
+                  <div className="d-flex flex-column justify-content-center mb-1">
                     {pokemon &&
                       pokemon.type.map((t) => (
                         <div
@@ -75,6 +87,37 @@ const PokemonBoard = (props) => {
                         >
                           <span
                             style={{
+                              fontSize: "80%",
+                              backgroundColor: "#fceaff",
+                              paddingLeft: "5px",
+                              paddingRight: "5px",
+                              borderRadius: "5px",
+                            }}
+                          >
+                            {t}
+                          </span>
+                        </div>
+                      ))}
+                  </div>
+
+                  <div className="pb-2">
+                    <b>
+                      <i>Abilities</i>
+                    </b>
+                  </div>
+                  <div className="d-flex flex-column justify-content-center">
+                    {pokemon &&
+                      pokemon.abilities.map((t) => (
+                        <div
+                          style={{
+                            // backgroundColor: "#fceaff",
+                            borderRadius: "2px",
+                            paddingLeft: "2px",
+                          }}
+                        >
+                          <span
+                            style={{
+                              fontSize: "80%",
                               backgroundColor: "#fceaff",
                               paddingLeft: "5px",
                               paddingRight: "5px",
