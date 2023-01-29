@@ -1,11 +1,13 @@
 #up {
   position: relative;
   margin: 0;
-  height: 100px;
+  width: 100% !important;
+  height: 300px;
   background-color: brown;
 }
 
 #down {
   margin: 0;
+  padding-left: 8px;
   height: 550px;
 }

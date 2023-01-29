@@ -18,8 +18,8 @@ public class PokemonApiClient {
         return new JSONObject(json);
     }
 
-    public JSONObject getAllPokemons() {
-        String json = restTemplate.getForObject(BASE_URL+"pokemon/", String.class);
+    public JSONObject getAllPokemons(Integer offset) {
+        String json = restTemplate.getForObject(BASE_URL+"pokemon/?offset="+offset+"&limit=20", String.class);
         return new JSONObject(json);
     }
 

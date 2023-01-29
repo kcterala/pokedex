@@ -2,12 +2,14 @@ package com.kcterala.pokedex.services;
 
 import com.kcterala.pokedex.client.PokemonApiClient;
 import com.kcterala.pokedex.entity.Pokemon;
+import com.kcterala.pokedex.model.PokemonResponse;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
+import java.awt.print.Pageable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -57,8 +59,8 @@ public class PokemonService {
     }
 
     @Cacheable
-    public List<Pokemon> getAllPokemons() {
-        JSONObject object = pokemonApiClient.getAllPokemons();
+    public List<Pokemon> getAllPokemons(Integer offset) {
+        JSONObject object = pokemonApiClient.getAllPokemons(offset);
         JSONArray pokemonList = (JSONArray) object.get("results");
         List<Pokemon> pokemons = new ArrayList<>();
 
@@ -71,7 +73,7 @@ public class PokemonService {
     }
 
     @Cacheable
-    public List<Pokemon> getPokemonsByType(String type) {
+    public List<Pokemon> getPokemonsByType(String type, Integer offset) {
         JSONObject object = pokemonApiClient.getPokemonsByType(type);
         List<Pokemon> pokemons = new ArrayList<>();
         JSONArray pokemonList = (JSONArray) object.get("pokemon");
@@ -81,7 +83,7 @@ public class PokemonService {
             pokemons.add(getPokemonByName(pokemonObject.getString("name")));
         }
 
-        return pokemons;
+        return pokemons.subList(offset, Math.min(offset + 20, pokemons.size()));
     }
 
     @Cacheable
